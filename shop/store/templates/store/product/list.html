@@ -1,0 +1,40 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block title %}
+  {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+{% block content %}
+
+
+      
+        
+          <h1 style="text-align:center;">{% if category %}{{ category.name }}{% else %}Products
+          {% endif %}</h1>
+        
+         <div class="row">
+            {% for product in products %}
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 mt-2 mb-2 ">
+              
+              <div class="card card-body bg-light" style="width: 14.5rem;">
+                <a href="{{ product.get_absolute_url }}">
+                  <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" class="img-thumbnail">
+                </a>
+  
+                <h6 style="text-align:center; padding-top:5px"><strong><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></strong></h6>
+
+                <button  class="btn btn-outline-secondary add-btn mb-2">Add to Cart</button>
+				        <a class="btn btn-outline-success" href="{{ product.get_absolute_url }}">View</a>
+                <hr>
+                
+                <h4 style="display: inline-block; text-align: center"><strong>${{ product.price }}</strong></h4>
+             </div>
+
+          </div>
+          {% endfor %}
+        </div>
+        
+      
+    
+  
+
+{% endblock %}
